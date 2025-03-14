@@ -94,13 +94,14 @@ img {
 
 /* NAVBAR */
 
-nav {
-  width: 100%;
-  background: var(--color-white);
-  position: fixed;
-  padding: 0.7rem 0;
-  top: 0;
-  z-index: 10;
+nav{
+    width: 100%;
+    background: var(--color-white);
+    position: fixed;
+    padding: 0.7rem 0;
+    top: 0;
+    margin-top: 0;
+    z-index: 10;
 }
 
 nav .container {
@@ -834,16 +835,47 @@ main .container .right {
     height: 4rem;
   }
 
-  .left .sidebar i {
-    margin-left: 1.5rem;
-  }
+       /* SIDEBAR */
+   .left .sidebar{
+        margin-top: 0.6rem;
+        background: transparent;
+        border-radius: none;
+    }
 
-  .customize-theme .card {
-    width: 80vw;
-  }
-  .authenticate-acct {
-    width: 80vw;
-  }
+    .customize-theme .card {
+      width: 80vw;
+    }
+  
+    .authenticate-acct {
+      width: 80vw;
+    }
+
+    .left .sidebar .menu-item:hover{
+        background: none;
+    }
+
+    .left .sidebar i{
+        right: 0;
+    }
+
+    .left .sidebar h3{
+        margin-left: 0;
+    }
+
+    .left .sidebar .menu-item{
+        padding: 0;
+        right: 0;
+    }
+
+
+    .left .sidebar .active {
+        background: none;
+    }
+
+    .left .sidebar .active::before{
+        content: "";
+        display: none;
+    }
 }
 
 /* FOR IPAD AND SMALL SCREEN */
