@@ -26,7 +26,7 @@ const registerForm = document.querySelector(".registerDiv");
 const authBtn = document.querySelector(".auth-btn");
 const loginSwitchBtn = document.querySelector(".loginSwitch");
 const registerSwitchBtn = document.querySelector(".registerSwitch");
-const userTypeInput = document.querySelector(".user-type");
+const userTypeInput = document.querySelector("#user-type");
 const userSelect = document.querySelector(".user-select");
 const realtorSelect = document.querySelector(".realtor-select");
 
@@ -113,6 +113,22 @@ if (loginSwitchBtn) {
     openThemeModal(loginForm);
   });
 }
+
+if (userSelect) {
+  userSelect.addEventListener("click", () => {
+    realtorSelect.classList.remove("active");
+    userSelect.classList.add("active");
+    userTypeInput.value = "user";
+  });
+}
+if (realtorSelect) {
+  realtorSelect.addEventListener("click", () => {
+    userSelect.classList.remove("active");
+    realtorSelect.classList.add("active");
+    userTypeInput.value = "realtor";
+  });
+}
+
 // CLOSE THEME MODAL WHEN CLICKING OUTSIDE
 if (themeModal) {
   themeModal.addEventListener("click", (e) => {
