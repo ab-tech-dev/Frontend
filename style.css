@@ -96,6 +96,7 @@ nav{
     position: fixed;
     padding: 0.7rem 0;
     top: 0;
+    margin-top: 0;
     z-index: 10;
 }
 
@@ -736,12 +737,44 @@ main .container .right {
         height: 4rem;
     }
 
-    .left .sidebar i{
-        margin-left: 1.5rem;
-    }
-
     .customize-theme .card {
         width: 80vw;
+    }
+
+
+        /* SIDEBAR */
+    .left .sidebar{
+        margin-top: 0.6rem;
+        background: transparent;
+        border-radius: none;
+    }
+
+
+    .left .sidebar .menu-item:hover{
+        background: none;
+    }
+
+    .left .sidebar i{
+        right: 0;
+    }
+
+    .left .sidebar h3{
+        margin-left: 0;
+    }
+
+    .left .sidebar .menu-item{
+        padding: 0;
+        right: 0;
+    }
+
+
+    .left .sidebar .active {
+        background: none;
+    }
+
+    .left .sidebar .active::before{
+        content: "";
+        display: none;
     }
 }
 
