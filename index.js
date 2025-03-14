@@ -21,11 +21,14 @@ const messageSearch = document.querySelector("#message-search");
 // FORM
 const authDiv = document.querySelector(".authenticate-acct");
 const authForm = document.querySelector(".auth");
-const loginForm = document.querySelector(".login");
-const registerForm = document.querySelector(".register");
+const loginForm = document.querySelector(".loginDiv");
+const registerForm = document.querySelector(".registerDiv");
 const authBtn = document.querySelector(".auth-btn");
 const loginSwitchBtn = document.querySelector(".loginSwitch");
 const registerSwitchBtn = document.querySelector(".registerSwitch");
+const userTypeInput = document.querySelector(".user-type");
+const userSelect = document.querySelector(".user-select");
+const realtorSelect = document.querySelector(".realtor-select");
 
 // Remove active class from all menu items
 const changeActiveItem = () => {

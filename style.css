@@ -704,16 +704,16 @@ main .container .right {
 
 /* Changes Made By EGHOSA */
 .form-control {
-  width: 80%;
   display: flex;
   margin: 0 auto;
   gap: 1rem;
+  width: 100%;
 }
 .form-control-actions {
   display: grid;
   gap: 2rem;
-  width: 80%;
   margin: 0 auto;
+  width: 100%;
 }
 .form-control > input {
   font-family: inherit;
@@ -728,15 +728,37 @@ main .container .right {
   border-radius: var(--border-radius);
   padding: var(--btn-padding);
 }
+.loginDiv,
+.registerDiv {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.authenticate-acct {
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  width: 50%;
+  box-shadow: 0 0 1rem var(--color-primary);
+  overflow: hidden;
+}
 .login,
 .register {
   display: grid;
   gap: 1rem;
+  margin: auto 0 auto 0;
+  padding: 2rem 2rem;
+}
+.loginDiv,
+.registerDiv {
+  display: grid;
+}
+.auth h2,
+.auth button {
+  text-align: left;
 }
 .authemail {
   margin-top: 1.5rem;
 }
-.register {
+.registerDiv {
   display: none;
 }
 .registerSwitch,
@@ -752,6 +774,25 @@ main .container .right {
 .authsubmit-btn {
   flex-grow: 1;
   width: 100%;
+}
+.user-type-select {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.user-type-select button {
+  padding: 0.5rem;
+  text-align: center;
+  color: var(--color-gray);
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  cursor: pointer;
+  margin: auto 0;
+}
+.user-type-select button:nth-child(1) {
+  background-color: var(--color-light);
+}
+.user-type-select button:nth-child(2) {
+background-color: transparent;
 }
 /* MEDIA QUERIES FOR DIFFERENT SCREEN SIZES */
 
@@ -791,6 +832,9 @@ main .container .right {
   }
 
   .customize-theme .card {
+    width: 80vw;
+  }
+  .authenticate-acct {
     width: 80vw;
   }
 }
@@ -839,6 +883,9 @@ main .container .right {
   }
 
   .customize-theme .card {
+    width: 92vw;
+  }
+  .authenticate-acct {
     width: 92vw;
   }
 }

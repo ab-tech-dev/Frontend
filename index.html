@@ -656,46 +656,72 @@
     </main>
     <!-- THEME CUSTOMIZATION -->
     <div class="customize-theme">
-      <div class="authenticate-acct card">
+      <div class="authenticate-acct">
         <div action="#" class="auth">
-          <div class="login">
-            <h2>Welcome account</h2>
-            <button class="registerSwitch text-muted">
-              New to ABRMS? Create an account
-            </button>
-            <div class="form-control authemail">
-              <input type="text" placeholder="Enter email" />
+          <div class="loginDiv">
+            <div>
+              <img
+                src="https://i.pinimg.com/474x/73/38/23/7338234e1ba51d1a475f60ab64cfb9a8.jpg"
+                alt="real estate image"
+              />
             </div>
-            <div class="form-control">
-              <input type="text" placeholder="Enter password" />
-            </div>
-
-            <div class="form-control-actions">
-              <button class="btn-primary authsubmit-btn">Login</button>
-              <button class="btn-danger authgoogle-btn">
-                Authenticate with Google
+            <div class="login">
+              <h2>Welcome back!</h2>
+              <button class="registerSwitch text-muted">
+                New to ABRMS? Create an account
               </button>
+              <div class="form-control authemail">
+                <input type="text" placeholder="Enter email" />
+              </div>
+              <div class="form-control">
+                <input type="text" placeholder="Enter password" />
+              </div>
+
+              <div class="form-control-actions">
+                <button class="btn-primary authsubmit-btn">Login</button>
+                <button class="btn-danger authgoogle-btn">
+                  Authenticate with Google
+                </button>
+              </div>
             </div>
           </div>
-          <div class="register">
-            <h2>Create an account</h2>
-            <button class="loginSwitch text-muted">
-              Do you have an accocunt? Log in to your account
-            </button>
-            <div class="form-control authemail">
-              <input type="text" placeholder="Enter email" />
+          <div class="registerDiv">
+            <div>
+              <img
+                src="https://i.pinimg.com/474x/73/38/23/7338234e1ba51d1a475f60ab64cfb9a8.jpg"
+                alt="real estate image"
+              />
             </div>
-            <div class="form-control">
-              <input type="text" placeholder="Enter password" />
-            </div>
-            <div class="form-control">
-              <input type="text" placeholder="Confirm password" />
-            </div>
-            <div class="form-control-actions">
-              <button class="btn-primary authsubmit-btn">Register</button>
-              <button class="btn-danger authgoogle-btn">
-                Authenticate with Google
+            <div class="register">
+              <h2>Welcome back!</h2>
+              <button class="loginSwitch text-muted">
+                Already have an account? Log in to your account
               </button>
+              <div class="form-control user-type-select">
+                <button class="user-select">User</button>
+                <button class="realtor-select">Realtor</button>
+              </div>
+              <div class="form-control authemail">
+                <input type="text" placeholder="Enter email" />
+              </div>
+              <div class="form-control">
+                <input type="text" placeholder="Enter password" />
+              </div>
+              <div class="hidden-inputs">
+                <input
+                  type="text"
+                  id="user-type"
+                  name="user-type"
+                  value="user"
+                  hidden
+                />
+              </div>
+              <div class="form-control-actions">
+                <button class="btn-primary authsubmit-btn">Login</button>
+                <button class="btn-danger authgoogle-btn">
+                  Authenticate with Google
+                </button>
+              </div>
             </div>
           </div>
         </div>
