@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile App</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #4a6cfa;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --light-gray: #e9ecef;
+            --medium-gray: #ced4da;
+            --dark-gray: #6c757d;
+            --danger-color: #dc3545;
+            --success-color: #28a745;
+        }
+        
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Mobile container */
+        .mobile-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Header */
+        .header {
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        /* Navigation */
+        .nav-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background-color: white;
+            z-index: 200;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar.open {
+            left: 0;
+        }
+        
+        .sidebar-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-sidebar {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .sidebar-content {
+            padding: 15px;
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+        }
+        
+        .sidebar-nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        .sidebar-nav .icon {
+            margin-right: 10px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* Main content */
+        .content {
+            padding: 15px;
+        }
+        
+        /* Search */
+        .search-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            color: var(--dark-gray);
+        }
+        
+        /* Cards */
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 15px;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .card-description {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--dark-gray);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        /* Tab navigation */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .tab-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: 500;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .tab-item.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        /* Skeleton loading */
+        .skeleton {
+            background: linear-gradient(90deg, var(--light-gray) 25%, var(--secondary-color) 50%, var(--light-gray) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+        }
+        
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+        
+        .skeleton-card {
+            height: 250px;
+            margin-bottom: 15px;
+        }
+        
+        /* Bottom navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid var(--light-gray);
+            z-index: 100;
+        }
+        
+        .bottom-nav-item {
+            padding: 12px 0;
+            flex: 1;
+            text-align: center;
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .bottom-nav-item.active {
+            color: var(--primary-color);
+        }
+        
+        .bottom-nav-icon {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--success-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 300;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        .notification.show {
+            opacity: 1;
+        }
+        
+        /* Floating action button */
+        .fab {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 400;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 440px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+        }
+        
+        .modal-content {
+            margin-bottom: 20px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        /* Forms */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .form-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        /* Pull to refresh */
+        .refresh-container {
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Content area (with bottom navigation space) */
+        .main-content {
+            padding-bottom: 70px;
+        }
+        
+        /* Shimmer effect */
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(
+                90deg, 
+                rgba(255, 255, 255, 0) 0, 
+                rgba(255, 255, 255, 0.2) 20%, 
+                rgba(255, 255, 255, 0.5) 60%, 
+                rgba(255, 255, 255, 0)
+            );
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Header -->
+        <header class="header">
+            <button class="nav-toggle" id="navToggle">☰</button>
+            <h1 class="header-title">Mobile App</h1>
+            <div class="header-action">⋮</div>
+        </header>
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Menu</h2>
+                <button class="close-sidebar" id="closeSidebar">×</button>
+            </div>
+            <div class="sidebar-content">
+                <ul class="sidebar-nav">
+                    <li><a href="#"><span class="icon">🏠</span> Home</a></li>
+                    <li><a href="#"><span class="icon">👤</span> Profile</a></li>
+                    <li><a href="#"><span class="icon">📝</span> My Tasks</a></li>
+                    <li><a href="#"><span class="icon">📊</span> Statistics</a></li>
+                    <li><a href="#"><span class="icon">⚙️</span> Settings</a></li>
+                    <li><a href="#"><span class="icon">❓</span> Help & Support</a></li>
+                    <li><a href="#"><span class="icon">📤</span> Logout</a></li>
+                </ul>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content">
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" placeholder="Search..." id="searchInput">
+                </div>
+                
+                <!-- Tabs -->
+                <div class="tabs">
+                    <div class="tab-item active" data-tab="all">All</div>
+                    <div class="tab-item" data-tab="recent">Recent</div>
+                    <div class="tab-item" data-tab="favorites">Favorites</div>
+                </div>
+                
+                <!-- Pull to refresh indicator -->
+                <div class="refresh-container" id="refreshIndicator" style="display: none;">
+                    <span>↓ Pull to refresh</span>
+                </div>
+                
+                <!-- Content Cards -->
+                <div class="cards-container" id="cardsContainer">
+                    <!-- Cards will be dynamically generated -->
+                </div>
+                
+                <!-- Loading Skeletons -->
+                <div class="skeleton-container" id="skeletonContainer" style="display: none;">
+                    <div class="skeleton skeleton-card"></div>
+                    <div class="skeleton skeleton-card"></div>
+                    <div class="skeleton skeleton-card"></div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="#" class="bottom-nav-item active" data-page="home">
+                <div class="bottom-nav-icon">🏠</div>
+                <span>Home</span>
+            </a>
+            <a href="#" class="bottom-nav-item" data-page="explore">
+                <div class="bottom-nav-icon">🔍</div>
+                <span>Explore</span>
+            </a>
+            <a href="#" class="bottom-nav-item" data-page="notifications">
+                <div class="bottom-nav-icon">🔔</div>
+                <span>Alerts</span>
+            </a>
+            <a href="#" class="bottom-nav-item" data-page="profile">
+                <div class="bottom-nav-icon">👤</div>
+                <span>Profile</span>
+            </a>
+        </nav>
+        
+        <!-- Floating Action Button -->
+        <button class="fab" id="addButton">+</button>
+        
+        <!-- Notification -->
+        <div class="notification" id="notification">Action completed successfully!</div>
+        
+        <!-- Modal -->
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Add New Item</h3>
+                    <button class="close-modal" id="closeModal">×</button>
+                </div>
+                <div class="modal-content">
+                    <form id="addItemForm">
+                        <div class="form-group">
+                            <label class="form-label" for="itemTitle">Title</label>
+                            <input type="text" id="itemTitle" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="itemDescription">Description</label>
+                            <input type="text" id="itemDescription" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="itemCategory">Category</label>
+                            <select id="itemCategory" class="form-input">
+                                <option value="work">Work</option>
+                                <option value="personal">Personal</option>
+                                <option value="education">Education</option>
+                                <option value="health">Health</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-outline" id="cancelAdd">Cancel</button>
+                    <button class="btn btn-primary" id="confirmAdd">Add Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample Data
+        const sampleItems = [
+            {
+                id: 1,
+                title: "Morning Workout Plan",
+                description: "Complete 30 minutes of cardio followed by strength training.",
+                image: "/api/placeholder/400/200",
+                category: "health",
+                date: "2 hours ago",
+                isFavorite: true
+            },
+            {
+                id: 2,
+                title: "Project Meeting Notes",
+                description: "Key discussion points from yesterday's team meeting on the new feature.",
+                image: "/api/placeholder/400/200",
+                category: "work",
+                date: "Yesterday",
+                isFavorite: false
+            },
+            {
+                id: 3,
+                title: "Grocery Shopping List",
+                description: "Items to buy for the weekend: fruits, vegetables, and household supplies.",
+                image: "/api/placeholder/400/200",
+                category: "personal",
+                date: "2 days ago",
+                isFavorite: true
+            },
+            {
+                id: 4,
+                title: "Online Course Progress",
+                description: "Complete module 3 of the web development course by Friday.",
+                image: "/api/placeholder/400/200",
+                category: "education",
+                date: "Last week",
+                isFavorite: false
+            }
+        ];
+
+        // DOM Elements
+        const navToggle = document.getElementById('navToggle');
+        const sidebar = document.getElementById('sidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const cardsContainer = document.getElementById('cardsContainer');
+        const skeletonContainer = document.getElementById('skeletonContainer');
+        const searchInput = document.getElementById('searchInput');
+        const tabItems = document.querySelectorAll('.tab-item');
+        const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+        const addButton = document.getElementById('addButton');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeModal = document.getElementById('closeModal');
+        const cancelAdd = document.getElementById('cancelAdd');
+        const confirmAdd = document.getElementById('confirmAdd');
+        const notification = document.getElementById('notification');
+        const addItemForm = document.getElementById('addItemForm');
+        const refreshIndicator = document.getElementById('refreshIndicator');
+
+        // Current state
+        let currentItems = [...sampleItems];
+        let currentTab = 'all';
+        let isLoading = false;
+        let touchStartY = 0;
+        let pullDistance = 0;
+        
+        // Initialize the app
+        function init() {
+            // Show loading skeletons initially
+            showLoading(true);
+            
+            // Simulate loading data
+            setTimeout(() => {
+                renderItems(currentItems);
+                showLoading(false);
+            }, 1500);
+            
+            // Set up event listeners
+            setupEventListeners();
+        }
+        
+        // Render items to the cards container
+        function renderItems(items) {
+            cardsContainer.innerHTML = '';
+            
+            if (items.length === 0) {
+                cardsContainer.innerHTML = `
+                    <div style="text-align: center; padding: 30px 0; color: var(--dark-gray);">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">📭</div>
+                        <p>No items found</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">${item.title}</h3>
+                        <p class="card-description">${item.description}</p>
+                        <div class="card-meta">
+                            <span>${item.category}</span>
+                            <span>${item.date}</span>
+                        </div>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    showNotification(`You selected: ${item.title}`);
+                });
+                
+                cardsContainer.appendChild(card);
+            });
+        }
+        
+        // Set up all event listeners
+        function setupEventListeners() {
+            // Sidebar navigation
+            navToggle.addEventListener('click', toggleSidebar);
+            closeSidebar.addEventListener('click', toggleSidebar);
+            
+            // Close sidebar when clicking outside
+            document.addEventListener('click', (e) => {
+                if (sidebar.classList.contains('open') && 
+                    !sidebar.contains(e.target) && 
+                    e.target !== navToggle) {
+                    toggleSidebar();
+                }
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', handleSearch);
+            
+            // Tab switching
+            tabItems.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    switchTab(tab.dataset.tab);
+                });
+            });
+            
+            // Bottom navigation
+            bottomNavItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchBottomNavItem(item.dataset.page);
+                });
+            });
+            
+            // Modal actions
+            addButton.addEventListener('click', openModal);
+            closeModal.addEventListener('click', closeModalHandler);
+            cancelAdd.addEventListener('click', closeModalHandler);
+            confirmAdd.addEventListener('click', addNewItem);
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    closeModalHandler();
+                }
+            });
+            
+            // Pull to refresh
+            document.addEventListener('touchstart', handleTouchStart, { passive: true });
+            document.addEventListener('touchmove', handleTouchMove, { passive: true });
+            document.addEventListener('touchend', handleTouchEnd, { passive: true });
+        }
+        
+        // Toggle sidebar
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+        }
+        
+        // Handle search input
+        function handleSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                filterItems();
+                return;
+            }
+            
+            const filteredItems = sampleItems.filter(item => 
+                item.title.toLowerCase().includes(searchTerm) || 
+                item.description.toLowerCase().includes(searchTerm) || 
+                item.category.toLowerCase().includes(searchTerm)
+            );
+            
+            renderItems(filteredItems);
+        }
+        
+        // Switch between tabs
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update active tab UI
+            tabItems.forEach(item => {
+                if (item.dataset.tab === tab) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Filter items based on selected tab
+            filterItems();
+        }
+        
+        // Filter items based on current tab
+        function filterItems() {
+            let filteredItems = [...sampleItems];
+            
+            if (currentTab === 'favorites') {
+                filteredItems = filteredItems.filter(item => item.isFavorite);
+            } else if (currentTab === 'recent') {
+                filteredItems = filteredItems.filter(item => 
+                    item.date === 'Yesterday' || item.date.includes('hours')
+                );
+            }
+            
+            // Apply search filter if search input is not empty
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            if (searchTerm !== '') {
+                filteredItems = filteredItems.filter(item => 
+                    item.title.toLowerCase().includes(searchTerm) || 
+                    item.description.toLowerCase().includes(searchTerm) || 
+                    item.category.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            currentItems = filteredItems;
+            renderItems(currentItems);
+        }
+        
+        // Switch between bottom navigation items
+        function switchBottomNavItem(page) {
+            bottomNavItems.forEach(item => {
+                if (item.dataset.page === page) {
+                    item.classList.add('active');
+                    showNotification(`Switched to ${page} page`);
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+        
+        // Open modal
+        function openModal() {
+            modalOverlay.style.display = 'flex';
+            // Reset form
+            addItemForm.reset();
+        }
+        
+        // Close modal
+        function closeModalHandler() {
+            modalOverlay.style.display = 'none';
+        }
+        
+        // Add new item
+        function addNewItem() {
+            const title = document.getElementById('itemTitle').value.trim();
+            const description = document.getElementById('itemDescription').value.trim();
+            const category = document.getElementById('itemCategory').value;
+            
+            if (!title || !description) {
+                showNotification('Please fill in all fields');
+                return;
+            }
+            
+            const newItem = {
+                id: sampleItems.length + 1,
+                title,
+                description,
+                image: "/api/placeholder/400/200",
+                category,
+                date: 'Just now',
+                isFavorite: false
+            };
+            
+            sampleItems.unshift(newItem);
+            closeModalHandler();
+            showNotification('New item added successfully!');
+            filterItems();
+        }
+        
+        // Show/hide loading skeletons
+        function showLoading(show) {
+            isLoading = show;
+            
+            if (show) {
+                skeletonContainer.style.display = 'block';
+                cardsContainer.style.display = 'none';
+            } else {
+                skeletonContainer.style.display = 'none';
+                cardsContainer.style.display = 'block';
+            }
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Handle pull-to-refresh
+        function handleTouchStart(e) {
+            if (window.scrollY === 0) {
+                touchStartY = e.touches[0].clientY;
+            }
+        }
+        
+        function handleTouchMove(e) {
+            if (touchStartY > 0 && window.scrollY === 0) {
+                pullDistance = e.touches[0].clientY - touchStartY;
+                
+                if (pullDistance > 0) {
+                    refreshIndicator.style.display = 'flex';
+                    refreshIndicator.style.transform = `translateY(${Math.min(pullDistance / 2, 50)}px)`;
+                }
+            }
+        }
+        
+        function handleTouchEnd() {
+            if (pullDistance > 70) {
+                // Trigger refresh
+                doRefresh();
+            }
+            
+            // Reset
+            refreshIndicator.style.display = 'none';
+            refreshIndicator.style.transform = 'translateY(0)';
+            touchStartY = 0;
+            pullDistance = 0;
+        }
+        
+        // Refresh data
+        function doRefresh() {
+            showLoading(true);
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Shuffle the order of items to simulate new data
+                sampleItems.sort(() => Math.random() - 0.5);
+                filterItems();
+                showLoading(false);
+                showNotification('Content refreshed!');
+            }, 1500);
+        }
+        
+        // Initialize the app
+        init();
+    </script>
+</body>
+</html>

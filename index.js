@@ -259,3 +259,42 @@ Bg3.addEventListener("click", () => {
 
   changeBg();
 });
+
+
+// Mobile Menu Toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const mobileMenu = document.querySelector('.mobile-menu');
+const closeMenuBtn = document.querySelector('.close-menu');
+const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+
+menuToggle.addEventListener('click', () => {
+  mobileMenu.classList.add('active');
+  mobileOverlay.classList.add('active');
+});
+
+closeMenuBtn.addEventListener('click', closeMenu);
+theme.addEventListener('click', closeMenu);
+mobileOverlay.addEventListener('click', closeMenu);
+
+function closeMenu() {
+  mobileMenu.classList.remove('active');
+  mobileOverlay.classList.remove('active');
+}
+
+// Reorder bottom navigation items for mobile
+window.addEventListener('resize', adjustBottomNav);
+window.addEventListener('DOMContentLoaded', adjustBottomNav);
+
+function adjustBottomNav() {
+  if (window.innerWidth <= 768) {
+    const bottomNav = document.querySelector('.left .sidebar');
+    const createBtn = document.querySelector('.create-button');
+    
+    if (bottomNav && createBtn && !createBtn.parentNode.isSameNode(bottomNav)) {
+      const items = bottomNav.children;
+      if (items.length >= 4) {
+        bottomNav.insertBefore(createBtn, items[2]);
+      }
+    }
+  }
+}
