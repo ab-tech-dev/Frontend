@@ -339,6 +339,15 @@ main .container .left .profile {
   display: block;
 }
 
+.messages-popup {
+  display: none;
+}
+
+.messages-popup.active {
+  display: none;
+}
+
+
 /* MIDDLE */
 .middle .stories {
   display: flex;
