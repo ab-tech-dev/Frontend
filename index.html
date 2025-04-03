@@ -53,8 +53,8 @@
       </div>
       <div class="mobile-menu-items">
         <a class="menu-item"><i class="uil uil-transaction"></i>Transactions</a>
-        <a class="menu-item"><i class="uil uil-chart-line"></i>Analytics</a>
-        <a class="menu-item" id="theme"><i class="uil uil-palette"></i>Theme</a>
+        <a class="menu-item"><i class="uil uil-chart-line"></i>Wallet</a>
+        <a class="menu-item theme" ><i class="uil uil-palette"></i>Theme</a>
         <a class="menu-item"><i class="uil uil-setting"></i>Settings</a>
       </div>
     </div>
@@ -82,7 +82,7 @@
               <span><i class="uil uil-compass"></i></span>
               <h3>Explore</h3>
             </a>
-            <div class="btn btn-primary create-button">
+            <div class="btn btn-primary create-button i">
               <i class="uil uil-plus"></i>
               <label for="create-post">Create Post</label>
             </div>
@@ -95,6 +95,10 @@
               <h3>Notifications</h3>
               <!-- NOTIFICATION POPUP -->
               <div class="notifications-popup">
+                <div class="popup-header">
+                  <i class="uil uil-arrow-left back-btn"></i>
+                  <h3>Notifications</h3>
+                </div>
                 <div>
                   <div class="profile-photo">
                     <img src="./images/profile-2.jpg" alt="" />
@@ -158,6 +162,16 @@
                 ></span
               >
               <h3>Messages</h3>
+              <!-- MESSAGES POPUP -->
+              <div class="messages-popup">
+                <div class="popup-header">
+                  <i class="uil uil-arrow-left back-btn"></i>
+                  <h3>Messages</h3>
+                </div>
+                <div class="messages-container">
+                  <!-- Message categories and search will be cloned here via JS -->
+                </div>
+              </div>
             </a>
             <a class="menu-item">
               <span><i class="uil uil-transaction"></i></span>
@@ -167,7 +181,7 @@
               <span><i class="uil uil-chart-line"></i></span>
               <h3>Analytics</h3>
             </a>
-            <a class="menu-item" id="theme">
+            <a class="menu-item theme" >
               <span><i class="uil uil-palette"></i></span>
               <h3>Theme</h3>
             </a>
@@ -237,7 +251,7 @@
               </div>
 
               <div class="photo">
-                <img src="./images/feed-1.jpg" alt="" />
+                <img src="https://drive.google.com/thumbnail?id=1_9xLOeXarVb_MgqDy6qtLQteeP7Dlxow" alt="">
               </div>
 
               <div class="action-buttons">
@@ -673,7 +687,7 @@
       <div class="authenticate-acct">
         <div action="#" class="auth">
           <div class="loginDiv">
-            <div>
+            <div class="img">
               <img
                 src="https://i.pinimg.com/474x/73/38/23/7338234e1ba51d1a475f60ab64cfb9a8.jpg"
                 alt="real estate image"
@@ -705,7 +719,7 @@
             </div>
           </div>
           <div class="registerDiv">
-            <div>
+            <div class="img">
               <img
                 src="https://i.pinimg.com/474x/73/38/23/7338234e1ba51d1a475f60ab64cfb9a8.jpg"
                 alt="real estate image"
@@ -736,7 +750,7 @@
                 />
               </div>
               <div class="form-control-actions">
-                <button class="btn-primary authsubmit-btn">Login</button>
+                <button class="btn-primary authsubmit-btn">Signup</button>
                 <button class="authgoogle-btn">
                   <img
                     src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xNy42NCA5LjIwNWMwLS42MzktLjA1Ny0xLjI1Mi0uMTY0LTEuODQxSDl2My40ODFoNC44NDRhNC4xNCA0LjE0IDAgMCAxLTEuNzk2IDIuNzE2djIuMjU5aDIuOTA4YzEuNzAyLTEuNTY3IDIuNjg0LTMuODc1IDIuNjg0LTYuNjE1eiIgZmlsbD0iIzQyODVGNCIgZmlsbC1ydWxlPSJub256ZXJvIj48L3BhdGg+PHBhdGggZD0iTTkgMThjMi40MyAwIDQuNDY3LS44MDYgNS45NTYtMi4xOGwtMi45MDgtMi4yNTljLS44MDYuNTQtMS44MzcuODYtMy4wNDguODYtMi4zNDQgMC00LjMyOC0xLjU4NC01LjAzNi0zLjcxMUguOTU3djIuMzMyQTguOTk3IDguOTk3IDAgMCAwIDkgMTh6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iPjwvcGF0aD48cGF0aCBkPSJNMy45NjQgMTAuNzFBNS40MSA1LjQxIDAgMCAxIDMuNjgyIDljMC0uNTkzLjEwMi0xLjE3LjI4Mi0xLjcxVjQuOTU4SC45NTdBOC45OTYgOC45OTYgMCAwIDAgMCA5YzAgMS40NTIuMzQ4IDIuODI3Ljk1NyA0LjA0MmwzLjAwNy0yLjMzMnoiIGZpbGw9IiNGQkJDMDUiIGZpbGwtcnVsZT0ibm9uemVybyI+PC9wYXRoPjxwYXRoIGQ9Ik05IDMuNThjMS4zMjEgMCAyLjUwOC40NTQgMy40NCAxLjM0NWwyLjU4Mi0yLjU4QzEzLjQ2My44OTEgMTEuNDI2IDAgOSAwQTguOTk3IDguOTk3IDAgMCAwIC45NTcgNC45NThMMy45NjQgNy4yOUM0LjY3MiA1LjE2MyA2LjY1NiAzLjU4IDkgMy41OHoiIGZpbGw9IiNFQTQzMzUiIGZpbGwtcnVsZT0ibm9uemVybyI+PC9wYXRoPjxwYXRoIGQ9Ik0wIDBoMTh2MThIMHoiPjwvcGF0aD48L2c+PC9zdmc+"
