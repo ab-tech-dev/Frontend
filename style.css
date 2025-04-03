@@ -700,7 +700,7 @@ main .container .right {
   border-radius: 50%;
 }
 
-customize-theme .choose-color span:nth-child(1) {
+.customize-theme .choose-color span:nth-child(1) {
   background: hsl(252, 75%, 60%);
 }
 

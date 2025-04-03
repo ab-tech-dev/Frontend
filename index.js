@@ -1,3 +1,27 @@
+// Add at the top of the file
+document.addEventListener('DOMContentLoaded', () => {
+  // Hide loader after page is fully loaded
+  window.addEventListener('load', () => {
+    const loader = document.querySelector('.loader-container');
+    const content = document.body;
+    
+    // Add content loading class
+    content.classList.add('content-loading');
+    
+    // Fade out loader
+    setTimeout(() => {
+      loader.classList.add('fade-out');
+      // Show content
+      content.classList.add('content-loaded');
+      
+      // Remove loader after animation
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 500);
+    }, 1000);
+  });
+});
+
 // SIDEBAR
 const menuItems = document.querySelectorAll(".menu-item");
 
@@ -235,10 +259,11 @@ Bg1.addEventListener("click", () => {
   changeBg();
 });
 
-// Background 2 (Darker Theme)
+// Background 2 (Dark Theme - Previously Dim)
 Bg2.addEventListener("click", () => {
-  lightColorLightness = "15%";
-  whiteColorLightness = "20%";
+  // Make this as dark as the previous black theme
+  lightColorLightness = "0%";
+  whiteColorLightness = "10%";
   darkColorLightness = "95%";
 
   Bg2.classList.add("active");
@@ -248,11 +273,12 @@ Bg2.addEventListener("click", () => {
   changeBg();
 });
 
-// Background 3 (Dark Mode)
+// Background 3 (True Black Theme)
 Bg3.addEventListener("click", () => {
-  lightColorLightness = "0%";
-  whiteColorLightness = "10%";
-  darkColorLightness = "95%";
+  // Make this pure black with subtle differences
+  lightColorLightness = "5%";    // Slightly lighter than pure black for secondary elements
+  whiteColorLightness = "0%";    // Pure black for background
+  darkColorLightness = "100%";   // White text
 
   Bg3.classList.add("active");
   Bg2.classList.remove("active");
